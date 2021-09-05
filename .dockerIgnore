@@ -1,0 +1,6 @@
+/.gradle
+/.idea
+build
+README.md
+kubernetes-manifests
+.git

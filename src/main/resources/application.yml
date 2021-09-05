@@ -1,0 +1,37 @@
+#logging:
+#  level:
+#    web: debug
+
+spring:
+  config:
+    import: optional:/etc/config/
+  lifecycle:
+    timeout-per-shutdown-phase: 10s
+  webflux:
+    base-path: /webhook
+
+server:
+  port: 8000
+  shutdown: graceful
+  max-http-header-size: 8KB
+
+management:
+  endpoint:
+    health:
+      group:
+        readiness:
+          include:
+            - readinessState
+        liveness:
+          include:
+            - livenessState
+      probes:
+        enabled: true
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+

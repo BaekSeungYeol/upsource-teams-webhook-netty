@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teams-webhook
+  labels:
+    app: teams-webhook
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: teams-webhook
+      labels:
+        app: teams-webhook
+    spec:
+
+      containers:
+        - name: teams-webhook
+          image: beck33/teams-webhook:0.03
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /webhook/actuator/health/liveness
+            initialDelaySeconds: 30
+            failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              port: 8000
+              path: /webhook/actuator/health/readiness
+            initialDelaySeconds: 20
+            periodSeconds: 5
+          imagePullPolicy: Always
+      nodeSelector:
+        dedicated: upsource
+      tolerations:
+          - key: dedicated
+            operator: Equal
+            effect: NoSchedule
+            value: upsource
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: star-connected-car-io
+        - name: regcred
+  selector:
+    matchLabels:
+      app: teams-webhook
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: teams-webhook
+spec:
+  selector:
+    app: teams-webhook
+  ports:
+    - name: http
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  type: NodePort
+
+

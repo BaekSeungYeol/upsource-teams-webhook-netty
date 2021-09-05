@@ -1,0 +1,58 @@
+plugins {
+  id 'org.springframework.boot' version '2.5.2'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'java'
+}
+
+group = 'com.hkmc'
+version = '0.0.1'
+sourceCompatibility = '11'
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  // spring
+  implementation 'org.springframework.boot:spring-boot-starter-validation'
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+  // actuator
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.5.1'
+
+  // jayway
+  implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.6.0'
+
+
+  // blockhound
+  implementation group: 'io.projectreactor.tools', name: 'blockhound', version: '1.0.3.RELEASE'
+  testImplementation group: 'io.projectreactor.tools', name: 'blockhound-junit-platform', version: '1.0.3.RELEASE'
+
+
+  // lombok
+  compileOnly "org.projectlombok:lombok"
+  annotationProcessor "org.projectlombok:lombok"
+  testAnnotationProcessor "org.projectlombok:lombok"
+  testImplementation 'org.projectlombok:lombok'
+
+
+
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'io.projectreactor:reactor-test'
+  testImplementation "org.codehaus.groovy:groovy-all:${groovyVersion}"
+  testImplementation "org.spockframework:spock-core:${spockVersion}"
+  testImplementation "org.spockframework:spock-spring:${spockVersion}"
+  testImplementation 'com.squareup.okhttp3:okhttp'
+  testImplementation 'com.squareup.okhttp3:mockwebserver'
+
+}
+
+test {
+  useJUnitPlatform()
+}
