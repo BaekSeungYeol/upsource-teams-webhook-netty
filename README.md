@@ -1,6 +1,6 @@
 # Teams Webhook Proxy Server
 
-<img src="https://user-images.githubusercontent.com/47316511/132131967-270fd147-ddae-494e-ba71-b39e1d1e2210.png" width="65%" height="65%"/>
+<img src="https://user-images.githubusercontent.com/47316511/132132092-a1ad19a8-1ce0-45ee-a5b7-d821f793e548.png" width="70%" height="70%"/>
 
 팀즈로 노티가 필요한 경우에 사용한다.
 
